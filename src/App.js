@@ -11,6 +11,9 @@ function App() {
     setMeetingId(meetingId.replace(/\s/g, ""));
     setOpenZoom(true);
   };
+  console.log(window.btoa("achraf"))
+
+  const frameRef = React.useRef();
 
   return (
     <div className="App">
@@ -28,7 +31,6 @@ function App() {
           value={password}
         />
         <input type="submit" value="Join Zoom" />
-        <h1>{meetingId}</h1>
       </form>
       {openZoom && (
         <div
@@ -40,8 +42,9 @@ function App() {
           }}
         >
           <iframe
+            ref={frameRef}
             title="zoom"
-            allow={"microphone; camera"}
+            allow={"microphone; camera; fullscreen"}
             style={{
               border: "0",
               height: "100%",
@@ -50,8 +53,9 @@ function App() {
               top: "0",
               width: "100%",
             }}
-            src={`https://success.zoom.us/wc/join/${meetingId}?pwd=${password}`}
-            frameborder="0"
+            src={`https://zoom.us/wc/${meetingId}/join?prefer=1&pwd=${password}&un=TWluZGF1Z2Fz`}
+            frameBorder="0"
+            sandbox="allow-scripts allow-forms"
           />
         </div>
       )}
