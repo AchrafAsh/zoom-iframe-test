@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [meetingId, setMeetingId] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [openZoom, setOpenZoom] = React.useState(false);
 
   const handleSubmit = (e) => {
@@ -12,8 +13,6 @@ function App() {
     setOpenZoom(true);
   };
   console.log(window.btoa("achraf"))
-
-  const frameRef = React.useRef();
 
   return (
     <div className="App">
@@ -30,6 +29,12 @@ function App() {
           onChange={(e) => setPassword(e.currentTarget.value)}
           value={password}
         />
+        <input
+          type="text"
+          placeholder="text"
+          onChange={(e) => setUsername(e.currentTarget.value)}
+          value={username}
+        />
         <input type="submit" value="Join Zoom" />
       </form>
       {openZoom && (
@@ -42,7 +47,6 @@ function App() {
           }}
         >
           <iframe
-            ref={frameRef}
             title="zoom"
             allow={"microphone; camera; fullscreen"}
             style={{
@@ -53,7 +57,7 @@ function App() {
               top: "0",
               width: "100%",
             }}
-            src={`https://zoom.us/wc/${meetingId}/join?prefer=1&pwd=${password}&un=TWluZGF1Z2Fz`}
+            src={`https://zoom.us/wc/${meetingId}/join?prefer=1&pwd=${password}&un=${window.btoa(username)}`}
             frameBorder="0"
             sandbox="allow-scripts allow-forms"
           />
