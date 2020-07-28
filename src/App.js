@@ -12,7 +12,6 @@ function App() {
     setMeetingId(meetingId.replace(/\s/g, ""));
     setOpenZoom(true);
   };
-  console.log(window.btoa("achraf"))
 
   return (
     <div className="App">
@@ -48,7 +47,7 @@ function App() {
         >
           <iframe
             title="zoom"
-            allow={"microphone; camera; fullscreen"}
+            allow={"microphone; camera"}
             style={{
               border: "0",
               height: "100%",
@@ -59,7 +58,6 @@ function App() {
             }}
             src={`https://zoom.us/wc/${meetingId}/join?prefer=1&pwd=${password}&un=${window.btoa(username)}`}
             frameBorder="0"
-            sandbox="allow-scripts allow-forms"
           />
         </div>
       )}
